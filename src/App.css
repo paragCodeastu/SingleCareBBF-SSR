@@ -1,38 +1,54 @@
-.App {
-  text-align: center;
+.searchdrug-byalphabate {
+  background-color: rgb(249, 218, 218);
+  width: 100vw;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.alphasuggestions-list {
+  list-style-type: disc;
+  padding: 0;
+  margin-top: 40px;
+  position: absolute;
+  top: 80px;
+  left: 30px;
+  width: 520px;
+  background-color: #fff; /* Set a background color for the suggestions list */
+  border-radius: 5px; /* Add some border-radius for a better appearance */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.alphasuggestions-list li {
+  cursor: pointer;
+  padding: 5px;
 }
+/* 
+.alphasuggestions-list li.selected {
+  background-color: #f0f0f0;
+} */
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* .alphasuggestions-list li:hover {
+  background-color: #f0f0f0;
+} */
+.app-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  flex-direction: column;
 }
 
-.App-link {
-  color: #61dafb;
+.searchdrug-byalphabate {
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.drugdetails {
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 5px;
+
+margin-top: 300px;}
+
+h3{
+  color: brown;
 }
