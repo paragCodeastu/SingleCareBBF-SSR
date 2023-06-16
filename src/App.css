@@ -11,8 +11,8 @@
   top: 80px;
   left: 30px;
   width: 520px;
-  background-color: #fff; /* Set a background color for the suggestions list */
-  border-radius: 5px; /* Add some border-radius for a better appearance */
+  background-color: #fff; 
+  border-radius: 5px; 
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -33,6 +33,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-color: gray;
 }
 
 .searchdrug-byalphabate {

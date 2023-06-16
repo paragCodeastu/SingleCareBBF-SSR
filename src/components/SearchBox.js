@@ -5,15 +5,13 @@ import '../App.css';
 
 
 const SearchBox = () => {
-  // State and Ref declarations
+
   const [suggestions, setSuggestions] = useState([]);
   const [selectedItemIndex, setSelectedItemIndex] = useState(-1);
   const inputRef = useRef(null);
   const debounceTimerRef = useRef(null);
 
-  // Function to fetch data from the API
   const fetchData = async (inputQuery) => {
-    // Make a POST request to 'http://localhost:3005/searchapi'
     try {
       const response = await axios.post('http://localhost:3005/searchapi', {
         query: inputQuery,
@@ -21,7 +19,6 @@ const SearchBox = () => {
       });
       const { data } = response;
 
-      // Update the suggestions state based on the API response
       if (data.results && data.results.length > 0) {
         const suggestions = data.results.map(({ displayName, seoName }) => ({
           displayName,
@@ -37,20 +34,17 @@ const SearchBox = () => {
     }
   };
 
-  // Function to navigate to drug details
   const navigatetoDrug = (selectedDrug, selectedDrugDisplayName) => {
     // navigate(`/drugdetails?selectedDrug=${selectedDrug}&selectedDrugDisplayName=${selectedDrugDisplayName}`);
     console.log('navigate');
   };
 
-  // Function to handle selecting a suggestion
   const handleSelectSuggestion = (suggestion) => {
     const selectedDrugDisplayName = suggestion.displayName;
     const selectedDrug = suggestion.seoName;
     navigatetoDrug(selectedDrug, selectedDrugDisplayName);
   };
 
-  // Function to handle input change
   const handleInputChange = (event) => {
     const inputQuery = event.target.value;
     setSelectedItemIndex(-1);
@@ -65,9 +59,6 @@ const SearchBox = () => {
     }
   };
 
-  // Initial fetch data on component mount
-
-  // Effect to fetch data when the component mounts and the inputQuery changes
   useEffect((inputQuery) => {
     setSelectedItemIndex(-1);
     clearTimeout(debounceTimerRef.current);
@@ -81,7 +72,6 @@ const SearchBox = () => {
     }
   }, []);
 
-  // Function to handle keydown events
   const handleKeyDown = (event) => {
     if (event.key === 'ArrowUp') {
       event.preventDefault();
@@ -99,14 +89,12 @@ const SearchBox = () => {
     }
   };
 
-  // Effect to select input text when a suggestion is selected
   useEffect(() => {
     if (inputRef.current && selectedItemIndex !== -1) {
       inputRef.current.setSelectionRange(0, inputRef.current.value.length);
     }
   }, [selectedItemIndex]);
 
-  // Render the search box component
   return (
     <div className="searchbox-container">
       <form name="searchForm">

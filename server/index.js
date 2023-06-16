@@ -8,7 +8,8 @@ import logger from 'morgan';
 import cors from 'cors';
 import searchapiRouter from './routes/searchapi';
 import drugdetailsapiRouter from './routes/drugdetailsapi';
-import userapiRouter from './routes/users'
+import axios from 'axios';
+
 const PORT = process.env.PORT || 3005;
 const app = express();
 
@@ -17,16 +18,33 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-
 app.use('/drugdetailsapi', drugdetailsapiRouter);
-
 app.use('/searchapi', searchapiRouter);
-app.use('/users',userapiRouter)
-app.get('/', (req, res) => {
-  console.log('Server Execution Start');
-  const apphtml = ReactDOMServer.renderToString(<App />);
-  const indexFile = path.resolve('./build/index.html');
+app.use(express.static(path.resolve(__dirname, 'build')));
+app.get('/', async (req, res) => {
+  const selectedDrug = 'neuraptine';
+  const selectedDrugDisplayName = 'Neuraptine';
 
+  const drugDetailsApiResponse = await axios.post('http://localhost:3005/drugdetailsapi', {
+    selectedDrug,
+    selectedDrugDisplayName
+  });
+  const drugDetailsApiData = drugDetailsApiResponse.data;
+
+  const query='ac';
+  const maxResults=6;
+
+  const searchApiResponse = await axios.post('http://localhost:3005/searchapi', {
+    query,
+    maxResults
+  });
+  const searchApiData = searchApiResponse.data;
+
+  const appHtml = ReactDOMServer.renderToString(
+    <App drugDetailsApiData={drugDetailsApiData} searchApiData={searchApiData} />
+  );
+
+  const indexFile = path.resolve('./build/index.html');
   fs.readFile(indexFile, 'utf8', (err, data) => {
     if (err) {
       console.error('Something went wrong');
@@ -34,15 +52,21 @@ app.get('/', (req, res) => {
     }
 
     return res.send(
-      data.replace('<div id="root"></div>', `<div id="root">${apphtml}</div>`)
+      `<html>
+      <head>
+      <title>React SSR</title>
+      </head>
+        <body>
+          <div id="root">${appHtml}</div>
+          <script src="/bundle.js"></script>
+          </body>
+      </html>`
     );
   });
 });
 
-app.use(express.static('./build'));
-
+// app.use(express.static('./build'));
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
-
 export default app;

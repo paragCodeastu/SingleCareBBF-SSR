@@ -2,26 +2,22 @@
 import React from 'react';
 import './App.css';
 import DrugDetails from './components/DrugDetails';
-import SearchBox from './components/SearchBox';
-// import { BrowserRouter as Router, Route,Routes,Link } from 'react-router-dom';
 import Searchbyalphabate from './components/Searchby alphabate';
 
-const App = () => {
-  return (
-    <div className="app-container">
+const App = ({ drugDetailsApiData,searchApiData }) => {
+    return (
+    <div className="app-container"> 
       <div className='searchdrug-byalphabate'>
           <h3>Print Drug Suggestion List</h3>
-              <Searchbyalphabate />
-              {/* <SearchBox /> */}
+            <Searchbyalphabate apiData={searchApiData} />
       </div>
       <div className='drugdetails'>  
-            <h3>Print DRUG INFORMATION </h3>
-          <DrugDetails />
+          <h3>Print DRUG INFORMATION </h3>  
+           <DrugDetails apiData={drugDetailsApiData} />
       </div>          
     </div>
   );
 };
-
 export default App;
 
 

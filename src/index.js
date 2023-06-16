@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router} from'react-router-dom'
 import App from './App';
-
+import './App.css';
 const container = document.getElementById('root');
-
-const root = ReactDOM.hydrateRoot(container,<App/>);
+const root = ReactDOM.hydrate(<App/>,container);

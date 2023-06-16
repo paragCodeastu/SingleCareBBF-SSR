@@ -1,11 +1,10 @@
 const express = require('express');
-const axios = require('axios');
 const router = express.Router();
+const axios = require('axios');
 
 router.post('/', async (req, res, next) => {
-  console.log('drugdetailsapi Called');
+
   try {
-    console.log(req.body)
     const selectedDrug = req.body.selectedDrug;
     const selectedDrugDisplayName = req.body.selectedDrugDisplayName; 
 

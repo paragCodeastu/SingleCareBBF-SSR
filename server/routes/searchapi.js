@@ -8,9 +8,9 @@ router.post('/', async (req, resp, next) => {
     const maxResults = req.body.maxResults;
     const response = await axios.post(
       'https://api.qaapi2.singlecare.com/druginformation/v2/searchdrugs',
-      {
-        query: query,
-        maxResults: maxResults
+      { 
+        query,
+        maxResults
       },
       {
         headers: {
