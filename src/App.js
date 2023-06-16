@@ -19,26 +19,3 @@ const App = ({ drugDetailsApiData,searchApiData }) => {
   );
 };
 export default App;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  {/* <Link to='/'>Isha</Link> */}
-      {/* <Link to="/drugdetails"></Link> */}
-      {/* <Routes> */}
-        {/* <Route path="/" element={<SearchBox />} /> */}
-        {/* <Route path="/drugdetails" element={<DrugDetails />} /> */}
-      {/* </Routes> */}
